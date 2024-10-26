@@ -3,7 +3,7 @@
 
 ## Overview
 
-This project analyzes a dataset of ultra marathon races, focusing on the Everglades 50 Mile Ultra Run held in 2020. The analysis includes data cleaning, filtering, and visualization of race statistics, athlete demographics, and performance metrics. 
+This project analyzes a dataset of ultra marathon races. The analysis includes data cleaning, filtering, and visualization of race statistics, athlete demographics, and performance metrics. 
 
 The primary goals are to:
 - Filter data to focus on specific races and years.
