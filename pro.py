@@ -1,58 +1,46 @@
 import pandas as pd
 
 
+# Function to load and clean data
 def load_and_clean_data(file_path):
-    """
-    Load and clean race data from a CSV file.
-
-    Parameters:
-    ----------
-    file_path : str
-        The path to the CSV file.
-
-    Returns:
-    -------
-    pd.DataFrame
-        Cleaned DataFrame with relevant race data.
-    """
     # Load data from CSV file
     df = pd.read_csv(file_path)
     print(df.head(10))
 
-    # Filter for specific event distances and year (remove USA restriction)
+    # Data processing and cleaning
     fltrdf = df[
         (df["Event distance/length"].isin(["50km", "50mi", "100km", "100mi"]))
-        & (df["Year of event"] == 2010)
+        & (df["Year of event"] == 2018)
     ]
 
     print(fltrdf.head(10))
 
-    # Clean event names by removing the part in parentheses
+    # Extract race name and clean up
     fltrdf["Event name"] = fltrdf["Event name"].str.split("(").str.get(0).str.strip()
 
-    # Calculate athlete age based on birth year
+    # Calculate athlete age
     if "Athlete year of birth" in df.columns:
-        fltrdf["athlete_age"] = 2010 - fltrdf["Athlete year of birth"]
+        fltrdf["athlete_age"] = 2018 - fltrdf["Athlete year of birth"]
 
-    # Drop irrelevant columns except nationality
+    # Drop unnecessary columns
     fltrdf = fltrdf.drop(
         [
             "Athlete club",
+            "Athlete country",
             "Athlete year of birth",
             "Athlete age category",
         ],
         axis=1,
     )
 
-    # Remove rows with missing values
     fltrdf = fltrdf.dropna()
     fltrdf = fltrdf.reset_index(drop=True)
 
-    # Convert data types for age and average speed
+    # Ensure correct data types
     fltrdf["athlete_age"] = fltrdf["athlete_age"].astype(int)
     fltrdf["Athlete average speed"] = fltrdf["Athlete average speed"].astype(float)
 
-    # Rename columns for clarity
+    # Rename columns for consistency
     fltrdf = fltrdf.rename(
         columns={
             "Year of event": "year",
@@ -64,11 +52,10 @@ def load_and_clean_data(file_path):
             "Athlete gender": "athlete_gender",
             "Athlete average speed": "athlete_average_speed",
             "Athlete ID": "athlete_id",
-            "Athlete country": "athlete_country",  # Keep nationality
         }
     )
 
-    # Select relevant columns for the final DataFrame
+    # Select relevant columns
     fltrdf2 = fltrdf[
         [
             "race_day",
@@ -80,8 +67,7 @@ def load_and_clean_data(file_path):
             "athlete_age",
             "athlete_performance",
             "athlete_average_speed",
-            "athlete_country",  # Include nationality
         ]
     ]
-
+    fltrdf2 = fltrdf2[fltrdf2["athlete_gender"] != "X"]
     return fltrdf2
