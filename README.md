@@ -12,7 +12,7 @@ The primary goals are to:
 
 ## Dataset
 
-The dataset used in this project is named `TWO_CENTURIES_OF_UM_RACES.csv`. It contains information about ultra marathon races, including:
+The dataset used in this project is named `newmaraton.csv`. It contains information about ultra marathon races, including:
 - Year of the event
 - Event name
 - Event distance/length
