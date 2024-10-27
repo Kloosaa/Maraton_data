@@ -1,3 +1,5 @@
+# main.py
+
 from pro import load_and_clean_data
 from vis import (
     plot_histogram,
@@ -7,12 +9,11 @@ from vis import (
     plot_linear_regression,
     plot_average_speed_by_season,
     plot_runners_count_by_age_group,
-    plot_nationality_distribution,
 )
 import pandas as pd
 
-# Load and process data
-file_path = "TWO_CENTURIES_OF_UM_RACES.csv"
+# Load and process the data
+file_path = "newmaraton.csv"  # Update file path to newmaraton.csv
 fltrdf2 = load_and_clean_data(file_path)
 
 # Visualizations
@@ -48,10 +49,10 @@ fltrdf2["race_season"] = fltrdf2["race_month"].apply(
     )
 )
 
-# Visualize average speed by season
+# Visualizations: average speeds in season for 50 mi races
 plot_average_speed_by_season(fltrdf2)
 
-# Categorize runners by age groups
+# Visualization: number of runners below and above 50 years old
 age_counts = fltrdf2.copy()
 age_counts["Age Group"] = age_counts["athlete_age"].apply(
     lambda x: "Below 50" if x < 50 else "50 and Above"
@@ -60,4 +61,3 @@ age_counts = (
     age_counts.groupby("Age Group").size().reset_index(name="Number of Runners")
 )
 plot_runners_count_by_age_group(age_counts)
-plot_nationality_distribution(fltrdf2)
