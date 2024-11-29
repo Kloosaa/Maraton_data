@@ -27,10 +27,11 @@ Make sure you have Python installed on your machine. This project requires the f
 - seaborn
 - matplotlib
 
+## From autor
+I divided the code into three parts, main.py, vis.py (visualizations) and pro.py (data processing) and added an ipynb file that combines all these parts and you can watch the visualizations
+pip install pandas seaborn matplotlib
 You can install the required libraries using pip:
 
 ```bash
 
-## From autor
-I divided the code into three parts, main.py, vis.py (visualizations) and pro.py (data processing) and added an ipynb file that combines all these parts and you can watch the visualizations
 pip install pandas seaborn matplotlib
